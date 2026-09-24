@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fffdfb">
+  <meta name="description" content="Rolling-WAM maintains a rolling window of joint video-action predictions for faster closed-loop robotic manipulation.">
+  <meta property="og:title" content="Rolling-WAM: World Action Models with Rolling Imagination">
+  <meta property="og:description" content="Rolling video-action denoising for faster replanning, with an evolving visual future.">
+  <meta property="og:type" content="website">
+  <title>Rolling-WAM · World Action Models with Rolling Imagination</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23b65b2b'/%3E%3Cpath d='M10 29V11h9a6 6 0 0 1 0 12h-9m10 0 9 6' fill='none' stroke='%23fffdfb' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="site-config.js" defer></script>
+  <script src="rolling-cycle.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#abstract">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#top"><em>Rolling</em>-WAM<span class="brand-trail" aria-hidden="true"><i></i><i></i><i></i></span></a>
+    <nav aria-label="Main navigation"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#experiments">Experiments</a><a href="#results">Results</a><a href="#citation">BibTeX</a></nav>
+  </header>
+  <main id="top">
+    <section class="hero" aria-labelledby="project-title">
+      <h1 id="project-title" class="rolling-title" aria-label="Rolling-WAM">
+        <span class="rolling-title-ink" aria-hidden="true">
+          <span class="title-layer title-base"><em>Rolling</em>-WAM</span>
+          <span class="title-layer title-flow"><em>Rolling</em>-WAM</span>
+          <span class="title-layer title-grain"><em>Rolling</em>-WAM</span>
+        </span>
+      </h1>
+      <p class="paper-title">World Action Models<br>with <em>Rolling Imagination</em></p>
+      <div class="authors" aria-label="Authors">
+        <span><a href="https://zyinghua.github.io/" target="_blank" rel="noopener noreferrer">Yinghua Zhou</a><sup>1,2,*</sup></span><span><a href="https://junjieye.com/" target="_blank" rel="noopener noreferrer">Junjie Ye</a><sup>1,*</sup></span><span><a href="https://zhaoy37.github.io/" target="_blank" rel="noopener noreferrer">Yiqi Zhao</a><sup>1</sup></span><span><a href="https://www.linkedin.com/in/hao-dong-711324309/" target="_blank" rel="noopener noreferrer">Hao Dong</a><sup>1</sup></span><span><a href="https://scholar.google.com/citations?user=2RCZsUkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Celina Shiyu Wang</a><sup>1</sup></span><span><a href="https://gelev97.github.io/" target="_blank" rel="noopener noreferrer">Ruohai Ge</a><sup>1</sup></span><span>Tingyi Yang<sup>1,3</sup></span><span><a href="https://basile.be/" target="_blank" rel="noopener noreferrer">Basile Van Hoorick</a><sup>4</sup></span><span><a href="https://uscresl.org/principal-investigator/" target="_blank" rel="noopener noreferrer">Gaurav Sukhatme</a><sup>1</sup></span><span><a href="https://vitorguizilini.github.io/" target="_blank" rel="noopener noreferrer">Vitor Guizilini</a><sup>4,†</sup></span><span><a href="https://yuewang.xyz/" target="_blank" rel="noopener noreferrer">Yue Wang</a><sup>1,†</sup></span>
+      </div>
+      <div class="affiliations" aria-label="Author affiliations">
+        <span><sup>1</sup>University of Southern California</span>
+        <span><sup>2</sup>Brown University</span>
+        <span><sup>3</sup>Fudan University</span>
+        <span><sup>4</sup>Toyota Research Institute</span>
+      </div>
+      <p class="author-notes"><span><sup>*</sup> Equal contribution</span><span><sup>†</sup> Equal advising</span></p>
+      <div class="project-links" aria-label="Project resources">
+        <a data-resource="paper" class="resource-link" role="link" aria-disabled="true" target="_blank" rel="noopener noreferrer"><img class="resource-icon" src="assets/arxiv.svg" alt="" width="18" height="21"> arXiv <small>Coming soon</small></a>
+        <a data-resource="code" class="resource-link" href="https://github.com/zyinghua/Rolling-WAM" target="_blank" rel="noopener noreferrer"><img class="resource-icon" src="assets/github.svg" alt="" width="20" height="21"> Code</a>
+      </div>
+    </section>
+    <section class="abstract" id="abstract" aria-labelledby="abstract-title">
+      <h2 id="abstract-title">Abstract</h2>
+      <p>World Action Models (WAMs) couple action generation with future visual prediction for robotic manipulation. However, completing the joint video-action denoising process at each replanning cycle incurs substantial latency, delaying action updates and limiting closed-loop responsiveness. We present Rolling-WAM, a formulation that distributes joint denoising across successive replanning cycles. Our method maintains a sliding window of video-action chunks at staggered noise levels. At each step, a rolling noise schedule fully denoises the imminent action chunk for execution, while partially refining farther-future chunks. As the window advances with new camera observations, the retained future chunks continue their denoising process. This distributes the computational cost over time while carrying an evolving visual-action context across chunk boundaries. Evaluations on LIBERO, RoboTwin, and a real-world Unitree G1 humanoid show that Rolling-WAM achieves competitive manipulation performance. By removing the need to denoise the entire prediction horizon from scratch, it delivers a 4.5× steady-state replanning speedup over standard joint WAMs.</p>
+    </section>
+    <figure class="project-video">
+      <video id="project-video" controls playsinline preload="none" poster="assets/rolling-wam-project-video.jpg" aria-label="Rolling-WAM project video">
+        <source src="assets/rolling-wam-project-video.mp4" type="video/mp4">
+      </video>
+    </figure>
+    <div class="metrics" aria-label="Key results">
+      <div><strong>4.5<span>×</span></strong><p>faster replanning<small>vs. Joint-WAM · steady state</small></p></div>
+      <div><strong>98.1<span>%</span></strong><p>LIBERO<small>average success</small></p></div>
+      <div><strong>93.3<span>%</span></strong><p>RoboTwin 2.0<small>average success</small></p></div>
+      <div><strong>85.0<span>%</span></strong><p>real-world G1<small>average success</small></p></div>
+    </div>
+
+    <section class="section method" id="method" aria-labelledby="method-title">
+      <h2 id="method-title">Method Overview</h2>
+      <p class="section-intro">Rolling-WAM jointly refines video and action predictions in a sliding window. The next action becomes ready to execute while future chunks remain partially denoised.</p>
+      <div class="rolling-explainer" aria-label="Animated rolling denoising illustration">
+        <div class="explainer-top"><span class="mini-label">Prediction window</span><span class="noise-key">Clean <i aria-hidden="true"></i> Noisy</span></div>
+        <div class="chunk-window" id="chunk-window" aria-label="Five aligned video-action chunks"></div>
+        <div class="cycle-bottom"><div><span class="cycle-count" id="cycle-count">01 / REFINE WINDOW PREDICTIONS</span><p id="cycle-description">Jointly denoise video and action predictions across the window.</p></div><div class="cycle-controls"><button type="button" class="text-button" id="cycle-toggle">Pause</button><button type="button" class="text-button" id="cycle-restart">Restart</button><button type="button" class="text-button" id="cycle-step" hidden>Next step</button></div></div>
+      </div>
+      <div class="method-steps">
+        <article data-cycle-step="0"><span class="step-number">01</span><h3>Refine Window Predictions</h3><p>Jointly denoise predictions across the window until the next action chunk is ready.</p></article>
+        <article data-cycle-step="1"><span class="step-number">02</span><h3>Execute and Observe</h3><p>Execute the action chunk and acquire a new observation.</p></article>
+        <article data-cycle-step="2"><span class="step-number">03</span><h3>Roll the Window</h3><p>Retain the future predictions and append a new noisy chunk.</p></article>
+      </div>
+      <figure class="framework"><img src="assets/framework.png" loading="lazy" width="2400" height="1096" alt="Rolling-WAM architecture and rolling inference: video and action experts share visual predictions, while the denoising window advances after each action chunk."><figcaption><p>Our model uses a Mixture-of-Transformers (MoT) architecture, pairing a pretrained video Diffusion Transformer with a lightweight action Transformer. The video expert processes the current camera observation and noisy future video, while the action expert processes noisy robot actions. Language instructions and robot state condition both experts.</p><p>Masked joint attention lets future video tokens attend to the current observation and all predicted video chunks, but not to actions. Action tokens attend to all visual tokens, while action-to-action attention stays within each chunk. Per-chunk noise conditioning lets both experts refine the rolling window at different denoising stages, completing the next action chunk while future predictions remain partially noisy.</p></figcaption></figure>
+    </section>
+    <section class="section" id="experiments" aria-labelledby="experiments-title">
+      <h2 id="experiments-title">Real-World Humanoid Experiments</h2>
+      <div class="section-meta"><p>Qualitative Rollouts</p><span class="playback-tag" id="playback-note">Original playback speed</span></div>
+      <div class="tabs task-tabs" role="tablist" aria-label="Real robot task">
+        <button role="tab" aria-selected="true" aria-controls="task-panel" id="task-doll" data-task="doll">Doll placement</button>
+        <button role="tab" aria-selected="false" aria-controls="task-panel" id="task-plates" data-task="plates" tabindex="-1">Plate stacking</button>
+        <button role="tab" aria-selected="false" aria-controls="task-panel" id="task-pouring" data-task="pouring" tabindex="-1">Bead pouring</button>
+      </div>
+      <div id="task-panel" role="tabpanel" aria-labelledby="task-doll">
+        <div class="video-trio">
+          <figure class="ours-video"><figcaption>Rolling-WAM <span>Ours</span></figcaption><video id="ours-video" controls muted playsinline preload="metadata" poster="assets/rolling-wam-doll.jpg" aria-label="Rolling-WAM doll placement"><source src="assets/rolling-wam-doll.mp4" type="video/mp4"></video></figure>
+          <figure><figcaption>Joint-WAM</figcaption><video id="joint-video" controls muted playsinline preload="metadata" poster="assets/joint-wam-doll.jpg" aria-label="Joint-WAM doll placement"><source src="assets/joint-wam-doll.mp4" type="video/mp4"></video><div class="missing-video" id="joint-missing" hidden>Video coming soon</div></figure>
+          <figure><figcaption>Fast-WAM</figcaption><video id="fast-video" controls muted playsinline preload="metadata" poster="assets/fast-wam-doll.jpg" aria-label="Fast-WAM doll placement"><source src="assets/fast-wam-doll.mp4" type="video/mp4"></video><div class="missing-video" id="fast-missing" hidden>Video coming soon</div></figure>
+        </div>
+        <div class="playback-row"><button type="button" class="small-button" id="compare-play">Play all</button><button type="button" class="text-button" id="compare-restart">Restart</button></div>
+      </div>
+    </section>
+    <section class="section" id="results" aria-labelledby="results-title">
+      <h2 id="results-title">Experimental Results</h2>
+      <p class="section-meta">Success rate (%) · higher is better</p>
+      <div class="tabs benchmark-tabs" role="tablist" aria-label="Benchmark results"><button role="tab" id="benchmark-robotwin" aria-controls="benchmark-panel" aria-selected="true" data-benchmark="robotwin">RoboTwin 2.0</button><button role="tab" id="benchmark-libero" aria-controls="benchmark-panel" aria-selected="false" data-benchmark="libero" tabindex="-1">LIBERO</button><button role="tab" id="benchmark-g1" aria-controls="benchmark-panel" aria-selected="false" data-benchmark="g1" tabindex="-1">Real-world G1</button></div>
+      <div id="benchmark-panel" role="tabpanel" aria-labelledby="benchmark-robotwin"><div class="table-scroll" tabindex="0" role="region" aria-label="Benchmark table, scroll horizontally on small screens"><table id="results-table"></table></div><p class="table-note" id="benchmark-note"></p></div>
+
+      <div class="efficiency-section"><h3>Replanning Latency</h3>
+      <div class="efficiency-layout"><div class="efficiency-copy"><span class="big-stat">215<span>ms</span></span><h3>steady-state replanning</h3><p class="speedup"><strong>4.5×</strong> <span>faster than Joint-WAM</span></p></div><div class="latency-chart" aria-label="Steady-state replanning latency in milliseconds; lower is better">
+        <div class="chart-title">REPLANNING LATENCY <span>Lower is better ↓</span></div>
+        <div class="bar-row"><span>Joint-WAM</span><div><i style="--bar:97.8%"></i></div><b>978</b></div>
+        <div class="bar-row"><span>Fast-WAM</span><div><i style="--bar:54.8%"></i></div><b>548</b></div>
+        <div class="bar-row"><span>π₀.₅</span><div><i style="--bar:29.6%"></i></div><b>296</b></div>
+        <div class="bar-row"><span>GR00T N1.7</span><div><i style="--bar:28.5%"></i></div><b>285</b></div>
+        <div class="bar-row ours"><span>Rolling-WAM</span><div><i style="--bar:21.5%"></i></div><b>215 <small>ms</small></b></div>
+      </div></div>
+      <p class="measurement-note">Single NVIDIA A100 · Controlled RoboTwin 2.0 setup<br>visual encoding + denoising; warm-up and initialization excluded.<span>No torch.compile, TensorRT, or custom CUDA kernels</span></p>
+      </div>
+    </section>
+    <section class="section citation" id="citation" aria-labelledby="citation-title">
+      <div class="citation-heading"><h2 id="citation-title">BibTeX</h2><button type="button" class="small-button" id="copy-citation">Copy</button></div>
+      <pre><code id="citation-code">@unpublished{zhou2026rollingwam,
+  title = {{Rolling-WAM: World Action Models with Rolling Imagination}},
+  author = {Zhou, Yinghua and Ye, Junjie and Zhao, Yiqi and Dong, Hao
+            and Wang, Celina Shiyu and Ge, Ruohai and Yang, Tingyi
+            and Van Hoorick, Basile and Sukhatme, Gaurav
+            and Guizilini, Vitor and Wang, Yue},
+  year = {2026},
+  note = {Manuscript; arXiv identifier forthcoming}
+}</code></pre>
+      <p class="copy-status" id="copy-status" role="status"></p>
+    </section>
+  </main>
+  <footer><a class="wordmark" href="#top"><em>Rolling</em>-WAM</a><a href="#top">Back to top ↑</a></footer>
+</body>
+</html>
